@@ -1,4 +1,4 @@
-# goai *UNDER_DEVELOPMENT*
+# goai
 
 A Go module for easy integration of OpenAI API calls in your projects.
 
@@ -8,6 +8,8 @@ A Go module for easy integration of OpenAI API calls in your projects.
 ## Description
 
 `goai` is a Go module that encapsulates OpenAI API calls, enabling easy integration of OpenAI services in your projects. This module simplifies sending requests to the OpenAI API and handling responses, allowing you to focus on implementing your artificial intelligence.
+
+At the moment it's far away from covering the whole API. At the moment I've just implemented the parts that I needed for the development of a chatbot.
 
 ## Installation
 
