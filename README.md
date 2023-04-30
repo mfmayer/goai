@@ -1,4 +1,4 @@
-# goai
+# goai *UNDER_DEVELOPMENT*
 
 A Go module for easy integration of OpenAI API calls in your projects.
 
