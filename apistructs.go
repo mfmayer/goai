@@ -1,10 +1,16 @@
 package goai
 
+type Role string
+
+const RoleUser Role = "user"
+const RoleAssistant Role = "assistant"
+const RoleSystem Role = "system"
+
 // Message represents a message object in a chat conversation.
 // Role is the sender's role, either "system", "user", or "assistant".
 // Content is the text content of the message.
 type Message struct {
-	Role    string `json:"role"`
+	Role    Role   `json:"role"`
 	Content string `json:"content"`
 }
 
@@ -36,6 +42,13 @@ type Usage struct {
 	TotalTokens      int `json:"total_tokens"`
 }
 
+type Error struct {
+	Message string `json:"message"`
+	Type    string `json:"type"`
+	Code    string `json:"code,omitempty"`
+	Param   string `json:"param,omitempty"`
+}
+
 // ChatCompletion represents the API response for a chat completion.
 // ID is the unique identifier for the completion.
 // Object is the type of object returned by the API, usually "text_completion".
@@ -44,6 +57,7 @@ type Usage struct {
 // Usage is a Usage object representing the token usage for the completion.
 // Choices is an array of Choice objects representing the response choices.
 type ChatCompletion struct {
+	Error   *Error   `json:"error,omitempty"`
 	ID      string   `json:"id"`
 	Object  string   `json:"object"`
 	Created int      `json:"created"`
