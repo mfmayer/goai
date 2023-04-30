@@ -1,4 +1,4 @@
-package oai
+package goai
 
 import (
 	"fmt"

@@ -1,4 +1,4 @@
-package oai
+package goai
 
 // Message represents a message object in a chat conversation.
 // Role is the sender's role, either "system", "user", or "assistant".
