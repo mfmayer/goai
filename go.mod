@@ -1,3 +1,3 @@
-module github.com/mfmayer/goai
+module github.com/mfmayer/gopenai
 
 go 1.19
