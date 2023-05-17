@@ -1,4 +1,4 @@
-package goai
+package gopenai
 
 import (
 	"bytes"
