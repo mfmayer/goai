@@ -9,7 +9,7 @@ import (
 func TestClient(t *testing.T) {
 	key := os.Getenv("OPENAI_API_KEY")
 
-	c := NewClient(key)
+	c := NewChatClient(key)
 	cC, err := c.GetChatCompletion(&ChatPrompt{
 		Model: "gpt-3.5-turbo",
 		Messages: []*Message{

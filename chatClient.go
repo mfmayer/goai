@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -20,25 +20,25 @@ func WithModel(model string) clientOption {
 	}
 }
 
-type Client struct {
+type ChatClient struct {
 	model        string
 	openaiApiKey string
 }
 
-func NewClient(openaiApKey string, opts ...clientOption) *Client {
+func NewChatClient(openaiApKey string, opts ...clientOption) *ChatClient {
 	options := clientOptions{
 		model: "gpt-3.5-turbo",
 	}
 	for _, opt := range opts {
 		opt(&options)
 	}
-	return &Client{
+	return &ChatClient{
 		openaiApiKey: openaiApKey,
 		model:        options.model,
 	}
 }
 
-func (c *Client) GetChatCompletion(prompt *ChatPrompt) (completion *ChatCompletion, err error) {
+func (c *ChatClient) GetChatCompletion(prompt *ChatPrompt) (completion *ChatCompletion, err error) {
 	url := "https://api.openai.com/v1/chat/completions"
 	headers := map[string]string{
 		"Content-Type":  "application/json",
@@ -64,7 +64,7 @@ func (c *Client) GetChatCompletion(prompt *ChatPrompt) (completion *ChatCompleti
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	completion = &ChatCompletion{}
 	err = json.Unmarshal(body, completion)
 	if err != nil {

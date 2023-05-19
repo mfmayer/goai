@@ -1,5 +1,7 @@
 # gopenai
 
+> ℹ️ **NOTE:** This project is currenty in development and incomplete. Please check documentation what parts of the OpenAI API can be used with this module.
+
 A Go module for easy integration of OpenAI API calls in your projects.
 
 [![GoDoc](https://pkg.go.dev/badge/github.com/mfmayer/gopenai)](https://pkg.go.dev/github.com/mfmayer/gopenai)
