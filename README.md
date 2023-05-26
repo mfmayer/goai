@@ -41,7 +41,7 @@ client := gopenai.NewClient("your_openai_api_key")
 
 ## Documentation
 
-For more information on using gopenai, including available features and methods, visit the [official documentation](https://pkg.go.dev/github.com/your_username/gopenai).
+For more information on using gopenai, including available features and methods, visit the [official documentation](https://pkg.go.dev/github.com/mfmayer/gopenai).
 
 ## Contributing
 

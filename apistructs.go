@@ -18,8 +18,20 @@ type Message struct {
 // Model is the ID of the OpenAI model used for the chat completion.
 // Messages is an array of Message objects representing the conversation.
 type ChatPrompt struct {
-	Model    string     `json:"model"`
+	// Model name, e.g. "gpt-3.5-turbo"
+	Model string `json:"model"`
+	// A list of messages describing the conversation so fa
 	Messages []*Message `json:"messages"`
+	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. OpenAIO generally recommends altering this or top_p but not both.
+	Temperature float32 `json:"temperature,omitempty"`
+	// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. OpenAI generally recommend altering this or temperature but not both
+	TopP float32 `json:"top_p,omitempty"`
+	// The maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
+	MaxTokens int `json:"max_tokens,omitempty"`
+	// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+	PresencePenalty float32 `json:"presence_penalty,omitempty"`
+	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+	FrequencyPenalty float32 `json:"frequency_penalty,omitempty"`
 }
 
 // Choice represents a single choice or response from the API.
