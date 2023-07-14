@@ -52,6 +52,10 @@ func NewChatClient(openaiApKey string, opts ...clientOption) *ChatClient {
 
 func (c *ChatClient) GetChatCompletion(prompt *ChatPrompt) (completion *ChatCompletion, err error) {
 	completion = &ChatCompletion{}
+	// Set default model if not set
+	if prompt.Model == "" {
+		prompt.Model = c.model
+	}
 	err = c.sendRequest("POST", "/v1/chat/completions", prompt, completion)
 	return
 }
