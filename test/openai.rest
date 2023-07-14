@@ -15,3 +15,195 @@ Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
 }
 
 ###
+
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
+
+{
+  "model": "gpt-3.5-turbo-0613",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the weather like in Boston?"
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_current_weather",
+      "description": "Get the current weather in a given location",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "The city and state, e.g. San Francisco, CA"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "celsius",
+              "fahrenheit"
+            ]
+          }
+        },
+        "required": [
+          "location"
+        ]
+      }
+    }
+  ]
+}
+
+###
+
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
+
+{
+  "model": "gpt-3.5-turbo-0613",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the weather like in Boston?"
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_current_weather",
+      "description": "Get the current weather in a given location",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "The city and state, e.g. San Francisco, CA"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "celsius",
+              "fahrenheit"
+            ]
+          }
+        },
+        "required": [
+          "location"
+        ]
+      }
+    }
+  ]
+}
+
+###
+
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
+
+{
+  "model": "gpt-3.5-turbo-0613",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Please start the mower at home if the weather is nice."
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_current_weather",
+      "description": "Get the current weather at home",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "start_mower",
+      "description": "starts the mower at home",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}
+
+###
+
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
+
+{
+  "model": "gpt-3.5-turbo-0613",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Please start the mower at home if the weather is nice."
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "function_call": {
+        "name": "get_current_weather",
+        "arguments": "{}"
+      }
+    },
+    {
+      "role": "function",
+      "name": "get_current_weather",
+      "content": "{\"temperature\": \"22\", \"unit\": \"celsius\", \"description\": \"Sunny\"}"
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_current_weather",
+      "description": "Get the current weather at home",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "type": "string",
+            "enum": [
+              "celsius",
+              "fahrenheit"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "start_mower",
+      "description": "starts the mower at home",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}
+
+###
+
+POST https://api.openai.com/v1/chat/completions
+Content-Type: application/json
+Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
+
+{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {"role": "user", "content": "Hello!"},
+        {"role": "assistant","content": "Hello there! How may I assist you?"},
+        {"role": "user", "content": "Ich teste die openai API."},
+        {"role": "assistant", "content": "Sehr gut! Wenn Sie Fragen haben oder Hilfe benötigen, stehe ich Ihnen gerne zur Verfügung."},
+        {"role": "user", "content": "Ich prüfe gerade die resultierende Anzahl der Tokens"},
+        {"role": "assistant","content": "Das ist ein wichtiger Schritt beim Testen der OpenAI API. Wie viele Tokens haben Sie in Ihrem Text gefunden? Gibt es Probleme oder Unregelmäßigkeiten bei der Anzahl der Tokens?"},
+        {"role": "user","content":"Ich denke ich habe es verstanden, die completion tokens beziehen sich immer auf die Antwort und die Prompt Tokens auf die Summe aller in der Anfrage vorkommenden Messages, inklusive deiner vorhergehenden Antworten. Ist die Annahme korrekt?"}
+    ]
+}
