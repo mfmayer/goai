@@ -79,25 +79,26 @@ type ChatPrompt struct {
 }
 
 // Choice represents a single choice or response from the API.
-// Message is a Message object representing the response message.
-// FinishReason is the reason the API ended the message (e.g., "stop", "max_tokens", or "temperature").
-// Index is the index of the choice in the response.
 type Choice struct {
-	Message      Message `json:"message"`
-	FinishReason string  `json:"finish_reason"`
-	Index        int     `json:"index"`
+	// Message is a Message object representing the response message.
+	Message Message `json:"message"`
+	// FinishReason is the reason the API ended the message (e.g., "stop", "max_tokens", or "temperature").
+	FinishReason string `json:"finish_reason"`
+	// Index is the index of the choice in the response.
+	Index int `json:"index"`
 }
 
 // Usage represents the token usage for a chat completion.
-// PromptTokens is the number of tokens in the prompt.
-// CompletionTokens is the number of tokens in the completion.
-// TotalTokens is the total number of tokens used in the API call.
 type Usage struct {
-	PromptTokens     int `json:"prompt_tokens"`
+	// PromptTokens is the number of tokens in the prompt.
+	PromptTokens int `json:"prompt_tokens"`
+	// CompletionTokens is the number of tokens in the completion.
 	CompletionTokens int `json:"completion_tokens"`
-	TotalTokens      int `json:"total_tokens"`
+	// TotalTokens is the total number of tokens used in the API call.
+	TotalTokens int `json:"total_tokens"`
 }
 
+// Error details
 type Error struct {
 	Message string `json:"message"`
 	Type    string `json:"type"`
@@ -106,22 +107,24 @@ type Error struct {
 }
 
 // ChatCompletion represents the API response for a chat completion.
-// ID is the unique identifier for the completion.
-// Object is the type of object returned by the API, usually "text_completion".
-// Created is a Unix timestamp of when the completion was created.
-// Model is the ID of the OpenAI model used for the completion.
-// Usage is a Usage object representing the token usage for the completion.
-// Choices is an array of Choice objects representing the response choices.
 type ChatCompletion struct {
-	Error   *Error   `json:"error,omitempty"`
-	ID      string   `json:"id"`
-	Object  string   `json:"object"`
-	Created int      `json:"created"`
-	Model   string   `json:"model"`
-	Usage   Usage    `json:"usage"`
+	// Error in case an error occured or was detected
+	Error *Error `json:"error,omitempty"`
+	// ID is the unique identifier for the completion.
+	ID string `json:"id"`
+	// Object is the type of object returned by the API, usually "text_completion".
+	Object string `json:"object"`
+	// Created is a Unix timestamp of when the completion was created.
+	Created int `json:"created"`
+	// Model is the ID of the OpenAI model used for the completion.
+	Model string `json:"model"`
+	// Usage is a Usage object representing the token usage for the completion.
+	Usage Usage `json:"usage"`
+	// Choices is an array of Choice objects representing the response choices.
 	Choices []Choice `json:"choices"`
 }
 
+// Model details
 type Model struct {
 	ID          string                 `json:"id"`
 	Object      string                 `json:"object"`
@@ -132,6 +135,7 @@ type Model struct {
 	Parent      string                 `json:"parent"`
 }
 
+// List of models
 type ModelList struct {
 	Object string  `json:"object"`
 	Data   []Model `json:"data"`

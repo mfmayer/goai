@@ -51,6 +51,15 @@ Authorization: Bearer {{$dotenv OPENAI_API_KEY}}
           "location"
         ]
       }
+    },
+    {
+      "name": "get_current_time_and_date",
+      "description": "Get the current time and date",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
     }
   ]
 }
