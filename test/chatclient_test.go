@@ -15,7 +15,9 @@ func TestChatClient(t *testing.T) {
 
 	c := gopenai.NewChatClient(key)
 	cC, err := c.GetChatCompletion(&gopenai.ChatPrompt{
-		Model: "gpt-3.5-turbo",
+		ChatPromptConfig: &gopenai.ChatPromptConfig{
+			Model: "gpt-3.5-turbo",
+		},
 		Messages: []*gopenai.Message{
 			{Role: "user", Content: "Hallo"},
 		},
@@ -34,7 +36,9 @@ func TestChatFuinctions(t *testing.T) {
 	key := os.Getenv("OPENAI_API_KEY")
 	c := gopenai.NewChatClient(key)
 	cC, err := c.GetChatCompletion(&gopenai.ChatPrompt{
-		Model: "gpt-3.5-turbo",
+		ChatPromptConfig: &gopenai.ChatPromptConfig{
+			Model: "gpt-3.5-turbo",
+		},
 		Messages: []*gopenai.Message{
 			{Role: "user", Content: "Wie ist das Wetter in Berlin?"},
 		},
