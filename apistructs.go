@@ -56,16 +56,11 @@ type Message struct {
 	FunctionCall *FunctionCall `json:"function_call,omitempty"`
 }
 
-// ChatPrompt represents a chat prompt to be sent to the API.
+// ChatPromptConfig contains model and model configuration parameters.
 // Model is the ID of the OpenAI model used for the chat completion.
-// Messages is an array of Message objects representing the conversation.
-type ChatPrompt struct {
-	// Model name, e.g. "gpt-3.5-turbo"
+type ChatPromptConfig struct {
+	// Model name/id of the OpenAI model used for the chat completion (e.g. "gpt-3.5-turbo")
 	Model string `json:"model"`
-	// A list of messages describing the conversation so fa
-	Messages []*Message `json:"messages"`
-	// A list of functions the model may generate JSON inputs for.
-	Functions []*Function `json:"functions,omitempty"`
 	// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. OpenAIO generally recommends altering this or top_p but not both.
 	Temperature float32 `json:"temperature,omitempty"`
 	// An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. OpenAI generally recommend altering this or temperature but not both
@@ -76,6 +71,15 @@ type ChatPrompt struct {
 	PresencePenalty float32 `json:"presence_penalty,omitempty"`
 	// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
 	FrequencyPenalty float32 `json:"frequency_penalty,omitempty"`
+}
+
+// ChatPrompt represents a chat prompt to be sent to the API.
+type ChatPrompt struct {
+	*ChatPromptConfig
+	// A list of messages describing the conversation so far
+	Messages []*Message `json:"messages"`
+	// A list of functions the model may generate JSON inputs for.
+	Functions []*Function `json:"functions,omitempty"`
 }
 
 // Choice represents a single choice or response from the API.
